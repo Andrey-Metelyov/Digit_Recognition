@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Digit_Recognition.iml" filepath="$PROJECT_DIR$/.idea/modules/Digit_Recognition.iml" group="Digit_Recognition" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Digit Recognition/task/Digit_Recognition-task.iml" filepath="$PROJECT_DIR$/.idea/modules/Digit Recognition/task/Digit_Recognition-task.iml" group="Digit_Recognition/Digit_Recognition-task" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Digit Recognition/task/Digit_Recognition-task_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Digit Recognition/task/Digit_Recognition-task_main.iml" group="Digit_Recognition/Digit_Recognition-task" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Digit Recognition/task/Digit_Recognition-task_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Digit Recognition/task/Digit_Recognition-task_test.iml" group="Digit_Recognition/Digit_Recognition-task" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Problems/Serializable user/Problems-Serializable_user.iml" filepath="$PROJECT_DIR$/.idea/modules/Problems/Serializable user/Problems-Serializable_user.iml" group="Digit_Recognition/Problems-Serializable_user" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Problems/Serializable user/Problems-Serializable_user_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Problems/Serializable user/Problems-Serializable_user_main.iml" group="Digit_Recognition/Problems-Serializable_user" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Problems/Serializable user/Problems-Serializable_user_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Problems/Serializable user/Problems-Serializable_user_test.iml" group="Digit_Recognition/Problems-Serializable_user" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Problems/Sorting arrays/Problems-Sorting_arrays.iml" filepath="$PROJECT_DIR$/.idea/modules/Problems/Sorting arrays/Problems-Sorting_arrays.iml" group="Digit_Recognition/Problems-Sorting_arrays" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Problems/Sorting arrays/Problems-Sorting_arrays_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Problems/Sorting arrays/Problems-Sorting_arrays_main.iml" group="Digit_Recognition/Problems-Sorting_arrays" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Problems/Sorting arrays/Problems-Sorting_arrays_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Problems/Sorting arrays/Problems-Sorting_arrays_test.iml" group="Digit_Recognition/Problems-Sorting_arrays" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Problems/The Range class/Problems-The_Range_class.iml" filepath="$PROJECT_DIR$/.idea/modules/Problems/The Range class/Problems-The_Range_class.iml" group="Digit_Recognition/Problems-The_Range_class" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Problems/The Range class/Problems-The_Range_class_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Problems/The Range class/Problems-The_Range_class_main.iml" group="Digit_Recognition/Problems-The_Range_class" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Problems/The Range class/Problems-The_Range_class_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Problems/The Range class/Problems-The_Range_class_test.iml" group="Digit_Recognition/Problems-The_Range_class" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Problems/The army of units/Problems-The_army_of_units.iml" filepath="$PROJECT_DIR$/.idea/modules/Problems/The army of units/Problems-The_army_of_units.iml" group="Digit_Recognition/Problems-The_army_of_units" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Problems/The army of units/Problems-The_army_of_units_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Problems/The army of units/Problems-The_army_of_units_main.iml" group="Digit_Recognition/Problems-The_army_of_units" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Problems/The army of units/Problems-The_army_of_units_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Problems/The army of units/Problems-The_army_of_units_test.iml" group="Digit_Recognition/Problems-The_army_of_units" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/util/util.iml" filepath="$PROJECT_DIR$/.idea/modules/util/util.iml" group="Digit_Recognition/util" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/util/util_main.iml" filepath="$PROJECT_DIR$/.idea/modules/util/util_main.iml" group="Digit_Recognition/util" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/util/util_test.iml" filepath="$PROJECT_DIR$/.idea/modules/util/util_test.iml" group="Digit_Recognition/util" />
+    </modules>
+  </component>
+</project>
