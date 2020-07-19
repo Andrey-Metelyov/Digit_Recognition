@@ -39,10 +39,10 @@ public class MultiLayerNeuralNetwork implements Serializable {
 //        System.out.println("idealInputs:\n" + idealInputs);
 //        System.out.println("idealOutputs:\n" + idealOutputs);
         double error = 0.0;
-        for (int epoch = 0; epoch < 1_000_000; epoch++) {
+        for (int epoch = 0; epoch < 10_000; epoch++) {
             error = 0.0;
-//            for (int i = 0; i < idealInputs.getRows(); i++) {
-            int i = random.nextInt(idealInputs.getRows());
+            for (int i = 0; i < idealInputs.getRows(); i++) {
+//            int i = random.nextInt(idealInputs.getRows());
                 Matrix a = guess(idealInputs.getRow(i));
 //                System.out.println(a);
 //                System.out.println(idealOutputs.getRow(i));
@@ -57,7 +57,7 @@ public class MultiLayerNeuralNetwork implements Serializable {
                     error += layer.update(0.1, a);
                     a = layer.A;
                 }
-//            }
+            }
         }
         System.out.println("error: " + error);
     }
