@@ -12,6 +12,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Digit Recognition/task" />
+            <option value="$PROJECT_DIR$/Problems/Multiple swaps" />
             <option value="$PROJECT_DIR$/Problems/Serializable user" />
             <option value="$PROJECT_DIR$/Problems/Sorting arrays" />
             <option value="$PROJECT_DIR$/Problems/The Range class" />

@@ -90,8 +90,6 @@ topics:
     theory_id: 8739
   - title: What are streams
     theory_id: 5533
-  - title: Output streams
-    theory_id: 8837
   - title: What is an exception
     theory_id: 3497
   - title: Hierarchy of exceptions
@@ -110,6 +108,8 @@ topics:
     theory_id: 3648
   - title: Writing files
     theory_id: 3652
+  - title: Output streams
+    theory_id: 8837
   - title: Input streams
     theory_id: 9723
   - title: Floating-point types

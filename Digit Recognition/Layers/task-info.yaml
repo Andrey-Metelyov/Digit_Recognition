@@ -266,6 +266,25 @@ files:
 - name: src/recognition/Matrix.java
   visible: true
   learner_created: true
+- name: src/recognition/MultiLayerNeuralNetwork.java
+  visible: true
+  learner_created: true
+- name: src/recognition/NeuralLayer.java
+  visible: true
+  learner_created: true
+- name: src/recognition/Neuron.java
+  visible: true
+  learner_created: true
+- name: src/recognition/NetworkFunction.java
+  visible: true
+  learner_created: true
+- name: src/recognition/Sigmoid.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/51/stages/280/implement
-status: Unchecked
-record: -1
+status: Solved
+feedback:
+  message: Congratulations! Continue on <a href="https://hyperskill.org/projects/51/stages/280/implement">JetBrains
+    Academy</a>
+  time: Sun, 19 Jul 2020 09:34:00 UTC
+record: 4

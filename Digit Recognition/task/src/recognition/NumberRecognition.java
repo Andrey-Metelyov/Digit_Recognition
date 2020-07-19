@@ -65,6 +65,19 @@ public class NumberRecognition {
                     0, 0, 1,
                     1, 1, 1 }});
 
+    final static Matrix idealInputs = getMatrix(idealInputNeurons);
+    final static Matrix idealOutputs = getMatrix(idealOutputNeurons);
+
+    private static Matrix getMatrix(Neuron[][] neurons) {
+        Matrix result = new Matrix(neurons.length, neurons[0].length);
+        for (int i = 0; i < neurons.length; i++) {
+            for (int j = 0; j < neurons[i].length; j++) {
+                result.setAt(i, j, neurons[i][j].value);
+            }
+        }
+        return result;
+    }
+
     private static Neuron[][] getNeurons(int[][] grid) {
         Neuron[][] result = new Neuron[grid.length][];
         for (int i = 0; i < grid.length; i++) {
