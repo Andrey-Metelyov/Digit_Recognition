@@ -19,12 +19,11 @@ public class NeuralLayer implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("weight={").append(weight.toString()).append("}\n")
-                .append("delta={").append(delta.toString()).append("}\n")
-                .append("A={").append(A.toString()).append("}\n")
-                .append("dZ={").append(dZ.toString()).append("}\n");
-        return sb.toString();
+        String sb = "weight={" + weight.toString() + "}\n" +
+                "delta={" + delta.toString() + "}\n" +
+                "A={" + A.toString() + "}\n" +
+                "dZ={" + dZ.toString() + "}\n";
+        return sb;
     }
 
     Matrix forward(Matrix x) {

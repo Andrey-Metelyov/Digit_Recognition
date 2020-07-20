@@ -43,7 +43,8 @@ public class MultiLayerNeuralNetwork implements Serializable {
             error = 0.0;
             for (int i = 0; i < idealInputs.getRows(); i++) {
 //            int i = random.nextInt(idealInputs.getRows());
-                Matrix a = guess(idealInputs.getRow(i));
+                Matrix a = idealInputs.getRow(i);
+                guess(a);
 //                System.out.println(a);
 //                System.out.println(idealOutputs.getRow(i));
 
@@ -52,15 +53,15 @@ public class MultiLayerNeuralNetwork implements Serializable {
                     delta = layers[j].backward(delta, layers[j + 1]);
                 }
 
-                a = idealInputs.getRow(i);
+//                Matrix a = idealInputs.getRow(i);
                 for (NeuralLayer layer : layers) {
                     error += layer.update(learningRate, a);
                     a = layer.A;
                 }
             }
-//            if (epoch % 100 == 0) {
+            if (epoch % 100 == 0) {
                 System.out.println("epoch #" + epoch + " error = " + error);
-//            }
+            }
             if (error < maxError) {
                 System.out.println("epoch #" + epoch + " error = " + error);
                 break;
@@ -75,19 +76,20 @@ public class MultiLayerNeuralNetwork implements Serializable {
         double error = 0.0;
         for (int epoch = 0; epoch < numberOfEpochs; epoch++) {
             error = 0.0;
-            Matrix a = guess(idealInputs);
+
+            guess(idealInputs);
 
             Matrix delta = layers[layers.length - 1].backward(idealOutputs, null);
             for (int j = layers.length - 2; j >= 0; j--) {
                 delta = layers[j].backward(delta, layers[j + 1]);
             }
 
-            a = idealInputs;
+            Matrix a = idealInputs;
             for (NeuralLayer layer : layers) {
                 error += layer.update(learningRate, a);
                 a = layer.A;
             }
-            if (epoch % 100 == 0) {
+            if (epoch % 10 == 0) {
                 System.out.println("epoch #" + epoch + " error = " + error);
             }
             if (error < maxError) {
@@ -97,6 +99,7 @@ public class MultiLayerNeuralNetwork implements Serializable {
         }
         System.out.println("error: " + error);
     }
+
 
     /*    public void learn(Matrix idealInputs, Matrix idealOutputs, boolean randomWeights) {
             if (randomWeights) {
@@ -163,8 +166,8 @@ public class MultiLayerNeuralNetwork implements Serializable {
     }
 
     private Matrix guess(Matrix input) {
-        for (int i = 0; i < layers.length; i++) {
-            input = layers[i].forward(input);
+        for (NeuralLayer layer : layers) {
+            input = layer.forward(input);
         }
         return input;
     }
@@ -210,34 +213,27 @@ public class MultiLayerNeuralNetwork implements Serializable {
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        MultiLayerNeuralNetwork neuralNetwork = new MultiLayerNeuralNetwork(new int[]{15, 15, 12, 10});
+        MultiLayerNeuralNetwork neuralNetwork = new MultiLayerNeuralNetwork(new int[]{2, 3, 4, 1});
 
 //        neuralNetwork.learn(NumberRecognition.idealInputs, NumberRecognition.idealOutputs);
 
-        neuralNetwork.deserialize("c:\\temp\\mlnetwork.neu");
+//        neuralNetwork.deserialize("c:\\temp\\mlnetwork.neu");
 
-        Matrix input = new Matrix(new double[][]{{
-                0,1,0, // 1
-                0,1,0,
-                1,1,0,
-                1,1,0,
-                0,1,1},
-               {1,1,1, // 9
-                1,0,1,
-                1,1,1,
-                0,0,1,
-                0,1,1},
-               {1,1,1, // 3
-                0,0,1,
-                1,1,1,
-                0,0,1,
-                0,1,1},
-               {1,1,0, // 2
-                0,0,1,
-                0,0,1,
-                1,0,0,
-                1,1,1}});
+        Matrix x = new Matrix(new double[][]{
+                {0, 0}, // 1
+                {1, 0},
+                {0, 1},
+                {1, 1}});
+        Matrix y = new Matrix(new double[][]{
+                {0},
+                {1},
+                {1},
+                {0},
+        });
+        neuralNetwork.learn(x, y, 20000, 0.1, 0.01);
 
-        System.out.println("guess:\n" + neuralNetwork.predict(input));
+        for (int i = 0; i < x.getRows(); i++) {
+            System.out.println("guess:" + x.getRow(i) + neuralNetwork.predict(x.getRow(i)));
+        }
     }
 }
