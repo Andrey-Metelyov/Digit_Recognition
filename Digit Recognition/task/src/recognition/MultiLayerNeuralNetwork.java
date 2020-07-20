@@ -32,14 +32,14 @@ public class MultiLayerNeuralNetwork implements Serializable {
                 layersDesc[layersDesc.length - 1], networkFunction);
     }
 
-    public void learn(Matrix idealInputs, Matrix idealOutputs) {
+    public void learn(Matrix idealInputs, Matrix idealOutputs, int numberOfEpochs, double learningRate, double maxError) {
         Random random = new Random();
 //        System.out.println("idealInputs:\n" + idealInputs);
-        idealInputs = idealInputs.addColumn(1.0);
+        idealInputs = idealInputs.addColumn(1.0, 0);
 //        System.out.println("idealInputs:\n" + idealInputs);
 //        System.out.println("idealOutputs:\n" + idealOutputs);
         double error = 0.0;
-        for (int epoch = 0; epoch < 10_000; epoch++) {
+        for (int epoch = 0; epoch < numberOfEpochs; epoch++) {
             error = 0.0;
             for (int i = 0; i < idealInputs.getRows(); i++) {
 //            int i = random.nextInt(idealInputs.getRows());
@@ -54,9 +54,45 @@ public class MultiLayerNeuralNetwork implements Serializable {
 
                 a = idealInputs.getRow(i);
                 for (NeuralLayer layer : layers) {
-                    error += layer.update(0.1, a);
+                    error += layer.update(learningRate, a);
                     a = layer.A;
                 }
+            }
+//            if (epoch % 100 == 0) {
+                System.out.println("epoch #" + epoch + " error = " + error);
+//            }
+            if (error < maxError) {
+                System.out.println("epoch #" + epoch + " error = " + error);
+                break;
+            }
+        }
+        System.out.println("error: " + error);
+    }
+
+    public void learn2(Matrix idealInputs, Matrix idealOutputs, int numberOfEpochs, double learningRate, double maxError) {
+        Random random = new Random();
+        idealInputs = idealInputs.addColumn(1.0, 0);
+        double error = 0.0;
+        for (int epoch = 0; epoch < numberOfEpochs; epoch++) {
+            error = 0.0;
+            Matrix a = guess(idealInputs);
+
+            Matrix delta = layers[layers.length - 1].backward(idealOutputs, null);
+            for (int j = layers.length - 2; j >= 0; j--) {
+                delta = layers[j].backward(delta, layers[j + 1]);
+            }
+
+            a = idealInputs;
+            for (NeuralLayer layer : layers) {
+                error += layer.update(learningRate, a);
+                a = layer.A;
+            }
+            if (epoch % 100 == 0) {
+                System.out.println("epoch #" + epoch + " error = " + error);
+            }
+            if (error < maxError) {
+                System.out.println("epoch #" + epoch + " error = " + error);
+                break;
             }
         }
         System.out.println("error: " + error);
@@ -122,7 +158,7 @@ public class MultiLayerNeuralNetwork implements Serializable {
         }
      */
     public Matrix predict(Matrix input) {
-        input = input.addColumn(1.0);
+        input = input.addColumn(1.0, 0);
         return guess(input);
     }
 

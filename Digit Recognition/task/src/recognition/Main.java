@@ -43,7 +43,7 @@ public class Main {
 
     private static void guessAllNumbers() {
         System.out.println("Guessing...");
-        File[] files = getFiles("c:\\temp\\data");
+        File[] files = getFiles("d:\\temp\\data");
         int count = 0;
         int correct = 0;
         double[] grid = new double[28 * 28];
@@ -90,7 +90,7 @@ public class Main {
     private static String getString(String message) {
         System.out.println(message);
 //        return scanner.nextLine();
-        return "c:\\temp\\data\\21372.txt";
+        return "d:\\temp\\data\\21372.txt";
     }
 
     private static void check() {
@@ -130,10 +130,12 @@ public class Main {
 //        Matrix output = new Matrix(7000, 10);
         double[][] input = new double[7000][];
         double[][] output = new double[7000][];
-        getRandomDataset("c:\\temp\\data", input, output);
+        System.out.println("get random dataset");
+        getRandomDataset2("d:\\temp\\data", input, output);
         Matrix inputMatrix = new Matrix(input);
         Matrix outputMatrix = new Matrix(output);
-        neuralNetwork.learn(inputMatrix ,outputMatrix);
+        System.out.println("start learning");
+        neuralNetwork.learn(inputMatrix ,outputMatrix, 1000, 0.1, 0.01);
         try {
             neuralNetwork.serialize(neuralNetworkFileName);
         } catch (IOException exception) {
@@ -146,6 +148,7 @@ public class Main {
         File[] files = getFiles(directory);
         Map<Integer, ArrayList<String>> samples = new HashMap<>();
         double[] grid = new double[28 * 28];
+//        "00013.txt"
         int counter = 0;
         for (File file : files) {
             int number = getGridFromFile(file, grid);
@@ -156,7 +159,7 @@ public class Main {
                 al.add(file.getAbsolutePath());
                 samples.put(number, al);
             }
-            if (counter++ % 1000 == 0) {
+            if (++counter % 1000 == 0) {
                 System.out.println("processed " + counter + " files");
             }
         }
@@ -168,6 +171,38 @@ public class Main {
                 input[i] = new double[28 * 28];
                 getGridFromFile(new File(filename), input[i]);
                 output[i] = getIdealOutput(key);
+            }
+            if (i % 1000 == 0) {
+                System.out.println("output filled: " + i);
+            }
+        }
+    }
+    private static void getRandomDataset2(String directory, double[][] input, double[][] output) {
+        Map<Integer, ArrayList<String>> samples = new HashMap<>();
+//        "00013.txt"
+        Random random = new Random();
+        for (int i = 0; i < input.length; ) {
+            int fileNumber = random.nextInt(70000);
+            ++fileNumber;
+            String fileName = String.format("%s\\%05d.txt", directory, fileNumber);
+            File file = new File(fileName);
+            double[] grid = new double[28 * 28];
+            int number = getGridFromFile(file, grid);
+            if (samples.containsKey(number)) {
+                if (samples.get(number).size() >= input.length / 10) {
+                    continue;
+                }
+                samples.get(number).add(file.getAbsolutePath());
+            } else {
+                ArrayList<String> al = new ArrayList<>();
+                al.add(file.getAbsolutePath());
+                samples.put(number, al);
+            }
+            input[i] = new double[28 * 28];
+            output[i] = getIdealOutput(number);
+
+            if (++i % 1000 == 0) {
+                System.out.println("output filled: " + i);
             }
         }
     }
