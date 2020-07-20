@@ -217,7 +217,7 @@ public class Matrix implements Serializable {
         };
         Matrix m = new Matrix(data);
         System.out.println(m.toString());
-        System.out.println(m.addColumn(999.0));
+        System.out.println(m.addColumn(999.0, 0));
         Matrix o = new Matrix(ones);
         System.out.println(m.multiply(o).toString());
         System.out.println(m.addRow(new double[]{1, 2, 3, 4}));
@@ -248,19 +248,24 @@ public class Matrix implements Serializable {
                     result.data[i][j] = data[i][j] - other.data[0][j];
                 }
             }
+        } else if (rows == other.rows && columns == other.columns) {
+            result = subtract(other);
         } else {
             System.out.println("error in minus()");
         }
         return result;
     }
 
-    public Matrix addColumn(double value) {
+    public Matrix addColumn(double value, int position) {
         Matrix result = new Matrix(rows, columns + 1);
         for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
+            for (int j = 0; j < position; j++) {
                 result.data[i][j] = data[i][j];
             }
-            result.data[i][columns] = value;
+            result.data[i][position] = value;
+            for (int j = position; j < columns; j++) {
+                result.data[i][j + 1] = data[i][j];
+            }
         }
         return result;
     }
