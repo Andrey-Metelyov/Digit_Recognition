@@ -37,7 +37,7 @@ public class Main {
                     number = guess(grid);
                 }
             }
-        } while (choice != 2);
+        } while (choice != 3);
         System.out.println("This number is " + number);
     }
 
@@ -76,7 +76,7 @@ public class Main {
                         .mapToDouble(Double::parseDouble)
                         .toArray();
                 for (int j = 0; j < 28; j++) {
-                    grid[28 * i + j] = line[i] / 255.0;
+                    grid[28 * i + j] = line[j] / 255.0;
                 }
             }
             number = Integer.parseInt(fileScanner.nextLine());
@@ -89,10 +89,10 @@ public class Main {
 
     private static String getString(String message) {
         System.out.println(message);
-//        return scanner.nextLine();
-        String fileName = "d:\\temp\\data\\21372.txt";
-        System.out.println(fileName);
-        return fileName;
+        return scanner.nextLine();
+//        String fileName = "d:\\temp\\data\\00373.txt";
+//        System.out.println(fileName);
+//        return fileName;
     }
 
     private static void check() {
@@ -116,7 +116,7 @@ public class Main {
             input.setAt(0, i, grid[i]);
         }
         Matrix result = neuralNetwork.predict(input);
-        logger.log(Level.INFO, "result: " + result);
+//        logger.log(Level.INFO, "result: " + result);
         int max = 0;
         for (int i = 0; i < result.getColumns(); i++) {
             if (result.getAt(0, i) > result.getAt(0, max)) {
@@ -137,7 +137,7 @@ public class Main {
         Matrix inputMatrix = new Matrix(input);
         Matrix outputMatrix = new Matrix(output);
         System.out.println("start learning");
-        neuralNetwork.learn2(inputMatrix ,outputMatrix, 10000, 0.1, 0.01);
+        neuralNetwork.learn2(inputMatrix ,outputMatrix, 1000, 0.01, Double.MIN_VALUE);
         try {
             neuralNetwork.serialize(neuralNetworkFileName);
         } catch (IOException exception) {
@@ -200,7 +200,7 @@ public class Main {
                 al.add(file.getAbsolutePath());
                 samples.put(number, al);
             }
-            input[i] = new double[28 * 28];
+            input[i] = grid;
             output[i] = getIdealOutput(number);
 
             if (++i % 1000 == 0) {

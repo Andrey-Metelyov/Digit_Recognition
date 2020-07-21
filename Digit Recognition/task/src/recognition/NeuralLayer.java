@@ -9,6 +9,7 @@ public class NeuralLayer implements Serializable {
     transient Matrix delta;
     transient Matrix A;
     transient Matrix dZ;
+    transient Matrix error;
 
     NeuralLayer(int sizeInput, int numberOfNeurons, NetworkFunction networkFunction) {
 //        neurons = new Neuron[numberOfNeurons];
@@ -43,7 +44,7 @@ public class NeuralLayer implements Serializable {
         if (right == null) {
 //            System.out.println("A:\n" + A);
 //            System.out.println("y:\n" + y);
-            Matrix error = A.minus(y);
+            error = A.minus(y);
 //            System.out.println("error:\n" + error);
 //            System.out.println("dZ:\n" + dZ);
             delta = error.dot(dZ);

@@ -6,9 +6,9 @@ import java.util.Random;
 import java.util.function.UnaryOperator;
 
 public class Matrix implements Serializable {
-    private final double[][] data;
     private final int rows;
     private final int columns;
+    private final double[][] data;
 
     Matrix(int rows, int columns) {
         this.rows = rows;
@@ -202,38 +202,6 @@ public class Matrix implements Serializable {
         return result;
     }
 
-    public static void main(String[] args) {
-        double[][] data = {
-                {1,2,3,4},
-                {5,6,7,8},
-                {9,0,1,2}
-        };
-        double[][] ones = {{1},{1},{1},{1}};
-        double[][] data2 = {
-                {1,2,3,4},
-                {5,6,7,8},
-                {9,0,1,2},
-                {3,4,5,6}
-        };
-        Matrix m = new Matrix(data);
-        System.out.println(m.toString());
-        System.out.println(m.addColumn(999.0, 0));
-        Matrix o = new Matrix(ones);
-        System.out.println(m.multiply(o).toString());
-        System.out.println(m.addRow(new double[]{1, 2, 3, 4}));
-        Matrix p = getMatrix(10, 20, 1);
-        System.out.println(p);
-        p = getMatrix(1, 5, 1);
-        System.out.println(p);
-        p = getMatrix(5, 1, 1);
-        System.out.println(p);
-        /*Matrix n = new Matrix(data2);
-        System.out.println(n.toString());
-        System.out.println(m.multiply(n).toString());
-        System.out.println(m.multiply(2));
-        System.out.println(n.multiply(0));*/
-    }
-
     public Matrix minus(Matrix other) {
         Matrix result = new Matrix(rows, columns);
         if (other.columns == 1) {
@@ -268,5 +236,48 @@ public class Matrix implements Serializable {
             }
         }
         return result;
+    }
+
+    public Matrix getMatrixPart(int startRow, int endRow) {
+        assert startRow < endRow && startRow < rows && endRow < rows;
+        Matrix result = new Matrix(endRow - startRow, columns);
+        for (int i = 0; i < result.rows; i++) {
+            result.data[i] = Arrays.copyOf(data[startRow + i], data[startRow + i].length);
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        double[][] data = {
+                {1,2,3,4},
+                {5,6,7,8},
+                {9,0,1,2}
+        };
+        double[][] ones = {{1},{1},{1},{1}};
+        double[][] data2 = {
+                {1,2,3,4},
+                {5,6,7,8},
+                {9,0,1,2},
+                {3,4,5,6}
+        };
+        Matrix m2 = new Matrix(data2);
+        System.out.println(m2.getMatrixPart(1,3));
+        Matrix m = new Matrix(data);
+        System.out.println(m.toString());
+        System.out.println(m.addColumn(999.0, 0));
+        Matrix o = new Matrix(ones);
+        System.out.println(m.multiply(o).toString());
+        System.out.println(m.addRow(new double[]{1, 2, 3, 4}));
+        Matrix p = getMatrix(10, 20, 1);
+        System.out.println(p);
+        p = getMatrix(1, 5, 1);
+        System.out.println(p);
+        p = getMatrix(5, 1, 1);
+        System.out.println(p);
+        /*Matrix n = new Matrix(data2);
+        System.out.println(n.toString());
+        System.out.println(m.multiply(n).toString());
+        System.out.println(m.multiply(2));
+        System.out.println(n.multiply(0));*/
     }
 }

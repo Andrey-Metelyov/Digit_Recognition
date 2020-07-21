@@ -71,33 +71,58 @@ public class MultiLayerNeuralNetwork implements Serializable {
     }
 
     public void learn2(Matrix idealInputs, Matrix idealOutputs, int numberOfEpochs, double learningRate, double maxError) {
-        Random random = new Random();
         idealInputs = idealInputs.addColumn(1.0, 0);
+        final int batchSize = idealInputs.getRows() / 70;
+        int batchStart = 0;
+        Matrix partInputs = idealInputs.getMatrixPart(batchStart, batchSize);
+        Matrix partOutputs = idealOutputs.getMatrixPart(batchStart, batchSize);
         double error = 0.0;
         for (int epoch = 0; epoch < numberOfEpochs; epoch++) {
             error = 0.0;
 
-            guess(idealInputs);
+            guess(partInputs);
 
-            Matrix delta = layers[layers.length - 1].backward(idealOutputs, null);
+            Matrix delta = layers[layers.length - 1].backward(partOutputs, null);
             for (int j = layers.length - 2; j >= 0; j--) {
                 delta = layers[j].backward(delta, layers[j + 1]);
             }
 
-            Matrix a = idealInputs;
+            Matrix a = partInputs;
             for (NeuralLayer layer : layers) {
                 error += layer.update(learningRate, a);
                 a = layer.A;
             }
             if (epoch % 10 == 0) {
+                showInputOutputs(partInputs.getRow(0), partOutputs.getRow(0), layers[layers.length-1].A.getRow(0));
                 System.out.println("epoch #" + epoch + " error = " + error);
             }
             if (error < maxError) {
                 System.out.println("epoch #" + epoch + " error = " + error);
                 break;
             }
+            batchStart += batchSize;
+            if (batchStart + batchSize >= idealInputs.getRows()) {
+                batchStart = 0;
+            }
+            partInputs = idealInputs.getMatrixPart(batchStart, batchStart + batchSize);
+            partOutputs = idealOutputs.getMatrixPart(batchStart, batchStart + batchSize);
         }
         System.out.println("error: " + error);
+    }
+
+    private void showInputOutputs(Matrix input, Matrix idealOutput, Matrix realOutput) {
+        System.out.println("input:");
+        for (int i = 0; i < input.getColumns(); i++) {
+            int num = (int) (input.getAt(0, i) * 9);
+            System.out.print(num > 0 ? num : " ");
+            if (i % 28 == 0) {
+                System.out.println();
+            }
+        }
+        System.out.println("ideal output:");
+        System.out.println(idealOutput);
+        System.out.println("real output:");
+        System.out.println(realOutput);
     }
 
 
@@ -192,9 +217,10 @@ public class MultiLayerNeuralNetwork implements Serializable {
         BufferedOutputStream bos = new BufferedOutputStream(fos);
         ObjectOutputStream oos = new ObjectOutputStream(bos);
         oos.writeObject(this);
-        for (NeuralLayer layer : layers) {
-            logger.log(Level.INFO, layer.toString());
-        }
+//        for (NeuralLayer layer : layers) {
+//            logger.log(Level.INFO, layer.toString());
+//        }
+        logger.log(Level.INFO, "serialize to file: " + fileName);
         oos.close();
     }
 
@@ -207,7 +233,7 @@ public class MultiLayerNeuralNetwork implements Serializable {
         layers = nn.layers;
         for (int i = 0; i < layers.length; i++) {
             layers[i].networkFunction = networkFunction;
-            logger.log(Level.INFO, layers[i].toString());
+//            logger.log(Level.INFO, layers[i].toString());
         }
         ois.close();
     }
