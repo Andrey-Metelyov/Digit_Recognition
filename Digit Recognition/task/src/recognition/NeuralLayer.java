@@ -6,9 +6,9 @@ public class NeuralLayer implements Serializable {
 //    Neuron[] neurons;
     transient NetworkFunction networkFunction;
     Matrix weight;
-    Matrix delta;
-    Matrix A;
-    Matrix dZ;
+    transient Matrix delta;
+    transient Matrix A;
+    transient Matrix dZ;
 
     NeuralLayer(int sizeInput, int numberOfNeurons, NetworkFunction networkFunction) {
 //        neurons = new Neuron[numberOfNeurons];
@@ -20,9 +20,9 @@ public class NeuralLayer implements Serializable {
     @Override
     public String toString() {
         String sb = "weight={" + weight.toString() + "}\n" +
-                "delta={" + delta.toString() + "}\n" +
-                "A={" + A.toString() + "}\n" +
-                "dZ={" + dZ.toString() + "}\n";
+                "delta={" + (delta == null ? "null" : delta.toString()) + "}\n" +
+                "A={" + (A == null ? "null" : A.toString()) + "}\n" +
+                "dZ={" + (dZ == null ? "null" : dZ.toString()) + "}\n";
         return sb;
     }
 

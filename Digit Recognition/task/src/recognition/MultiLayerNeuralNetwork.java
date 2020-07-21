@@ -230,7 +230,7 @@ public class MultiLayerNeuralNetwork implements Serializable {
                 {1},
                 {0},
         });
-        neuralNetwork.learn(x, y, 20000, 0.1, 0.01);
+        neuralNetwork.learn2(x, y, 20000, 0.1, 0.01);
 
         for (int i = 0; i < x.getRows(); i++) {
             System.out.println("guess:" + x.getRow(i) + neuralNetwork.predict(x.getRow(i)));
