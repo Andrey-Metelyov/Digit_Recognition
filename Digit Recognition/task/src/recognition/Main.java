@@ -90,7 +90,9 @@ public class Main {
     private static String getString(String message) {
         System.out.println(message);
 //        return scanner.nextLine();
-        return "d:\\temp\\data\\21372.txt";
+        String fileName = "d:\\temp\\data\\21372.txt";
+        System.out.println(fileName);
+        return fileName;
     }
 
     private static void check() {
@@ -135,7 +137,7 @@ public class Main {
         Matrix inputMatrix = new Matrix(input);
         Matrix outputMatrix = new Matrix(output);
         System.out.println("start learning");
-        neuralNetwork.learn(inputMatrix ,outputMatrix, 1000, 0.1, 0.01);
+        neuralNetwork.learn2(inputMatrix ,outputMatrix, 10000, 0.1, 0.01);
         try {
             neuralNetwork.serialize(neuralNetworkFileName);
         } catch (IOException exception) {
