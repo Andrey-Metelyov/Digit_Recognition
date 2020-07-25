@@ -33,12 +33,27 @@ public class Main {
                 } else if (choice == 3) {
                     File file = new File(getString("Enter filename: "));
                     double[] grid = new double[28 * 28];
-                    int numberInFile = getGridFromFile(file, grid);
+//                    int numberInFile = getGridFromFile(file, grid);
+                    getGridFromInput(grid);
                     number = guess(grid);
                 }
             }
         } while (choice != 3);
         System.out.println("This number is " + number);
+    }
+
+    private static void getGridFromInput(double[] grid) {
+        for (int i = 0; i < 28; i++) {
+            double[] line = Stream.of(scanner.nextLine().split("\\s+"))
+                    .mapToDouble(Double::parseDouble)
+                    .toArray();
+            for (int j = 0; j < 28; j++) {
+                grid[28 * i + j] = line[j] / 255.0;
+            }
+            if (!scanner.hasNext()) {
+                break;
+            }
+        }
     }
 
     private static void guessAllNumbers() {
@@ -57,7 +72,7 @@ public class Main {
             System.out.println(file + " number: " + number + " guessed: " + guessed);
         }
         System.out.printf("The network prediction accuracy: %d/%d, %d%%\n",
-                correct, count, correct/count);
+                correct, count, correct * 100 / count);
     }
 
     private static File[] getFiles(String directory) {
@@ -137,7 +152,7 @@ public class Main {
         Matrix inputMatrix = new Matrix(input);
         Matrix outputMatrix = new Matrix(output);
         System.out.println("start learning");
-        neuralNetwork.learn2(inputMatrix ,outputMatrix, 1000, 0.01, Double.MIN_VALUE);
+        neuralNetwork.learn2(inputMatrix ,outputMatrix, 20000, 0.1, 1);
         try {
             neuralNetwork.serialize(neuralNetworkFileName);
         } catch (IOException exception) {
@@ -179,6 +194,7 @@ public class Main {
             }
         }
     }
+
     private static void getRandomDataset2(String directory, double[][] input, double[][] output) {
         Map<Integer, ArrayList<String>> samples = new HashMap<>();
 //        "00013.txt"
@@ -191,7 +207,7 @@ public class Main {
             double[] grid = new double[28 * 28];
             int number = getGridFromFile(file, grid);
             if (samples.containsKey(number)) {
-                if (samples.get(number).size() >= input.length / 10) {
+                if (number != 8 && number != 9 && samples.get(number).size() >= input.length / 20) {
                     continue;
                 }
                 samples.get(number).add(file.getAbsolutePath());

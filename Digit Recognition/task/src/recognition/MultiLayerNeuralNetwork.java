@@ -98,7 +98,7 @@ public class MultiLayerNeuralNetwork implements Serializable {
             }
             if (error < maxError) {
                 System.out.println("epoch #" + epoch + " error = " + error);
-                break;
+//                break;
             }
             batchStart += batchSize;
             if (batchStart + batchSize >= idealInputs.getRows()) {

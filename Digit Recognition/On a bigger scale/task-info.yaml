@@ -379,13 +379,9 @@ files:
     }
   learner_created: false
 feedback_link: https://hyperskill.org/projects/51/stages/281/implement
-status: Failed
+status: Solved
 feedback:
-  message: "Wrong answer in test #2\n\nLast line contains number 0 but expected to\
-    \ contain number 1\n\nPlease find below the output of your program during this\
-    \ failed test.\nNote that the &#39;&gt;&#39; character indicates the beginning\
-    \ of the input line.\n\n---\n\n1. Learn the network\n2. Guess all the numbers\n\
-    3. Guess number from text file\n&gt; 3\nYour choice: 3\nEnter filename: \nd:\\\
-    temp\\data\\00373.txt\nThis number is 0"
-  time: Tue, 21 Jul 2020 15:41:48 UTC
+  message: Congratulations! Continue on <a href="https://hyperskill.org/projects/51/stages/281/implement">JetBrains
+    Academy</a>
+  time: Sat, 25 Jul 2020 06:59:13 UTC
 record: -1
